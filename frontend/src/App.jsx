@@ -4,7 +4,7 @@ import UserLayout from "./components/Layout/UserLayout"
 import Home from "./pages/Home"
 import {Toaster} from "sonner";
 import Login from "./pages/Login";
-import Register from "./pages/register";
+import Register from "./pages/Register";
 import Profile from "./pages/Profile";
 import CollectionPage from "./pages/CollectionPage";
 import ProductDetails from "./components/Products/ProductDetails";
