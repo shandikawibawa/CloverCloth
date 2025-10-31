@@ -27,7 +27,10 @@ app.use(express.json());
 // 🔹 CORS Configuration (izin frontend mengirim token)
 app.use(
   cors({
-    origin: "http://localhost:5173", // ⚠️ sesuaikan dengan port frontend kamu
+    origin: [
+      "http://localhost:5173",
+      "https://clover-cloth-h8x5.vercel.app",
+    ], // ⚠️ sesuaikan dengan port frontend kamu
     credentials: true,
     allowedHeaders: ["Content-Type", "Authorization"],
     methods: ["GET", "POST", "PUT", "DELETE"],
