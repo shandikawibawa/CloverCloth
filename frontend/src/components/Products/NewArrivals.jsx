@@ -78,7 +78,7 @@ const NewArrivals = () => {
         </p>
 
         {/* Scroll Button */}
-        <div className='absolute right-0 bottom-[-30px] flex space-x-2'>
+        <div className='absolute right-0 bottom-[-50px] flex space-x-2'>
             <button 
             onClick={() => scroll("left")} 
             disabled={!canScrollLeft}
