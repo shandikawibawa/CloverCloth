@@ -1,10 +1,10 @@
 import { __DO_NOT_USE__ActionTypes, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
+import api from "../../utils/axiosInstance";
 
 // Fetch all orders (admin only)
 export const fetchAllOrders = createAsyncThunk("adminOrders/fetchAllOrders", async(__, {rejectWithValue}) => {
         try {
-            const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/admin/orders`, 
+            const response = await api.get(`${import.meta.env.VITE_BACKEND_URL}/api/admin/orders`, 
                 {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem("userToken")}`,
@@ -20,7 +20,7 @@ export const fetchAllOrders = createAsyncThunk("adminOrders/fetchAllOrders", asy
 // update order delivery status
 export const updateOrderStatus = createAsyncThunk("adminOrders/updateOrderStatus", async({ id, status }, {rejectWithValue}) => {
         try {
-            const response = await axios.put(`${import.meta.env.VITE_BACKEND_URL}/api/admin/orders/${id}`, 
+            const response = await api.put(`${import.meta.env.VITE_BACKEND_URL}/api/admin/orders/${id}`, 
                 {status},  
                 {
                     headers: {
@@ -37,7 +37,7 @@ export const updateOrderStatus = createAsyncThunk("adminOrders/updateOrderStatus
 // Delete an order
 export const deleteOrder = createAsyncThunk("adminOrders/deleteOrder", async(id, {rejectWithValue}) => {
         try {
-            await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/api/admin/orders/${id}`, 
+            await api.delete(`${import.meta.env.VITE_BACKEND_URL}/api/admin/orders/${id}`, 
                 {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem("userToken")}`,

@@ -1,12 +1,12 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
+import api from "../../utils/axiosInstance"
 
 // Async Thunk to fetch user orders
 export const fetchUserOrders = createAsyncThunk(
     "order/fetchUserOrders", 
     async(__, { rejectWithValue }) => {
         try {
-            const response = await axios.get(
+            const response = await api.get(
                 `${import.meta.env.VITE_BACKEND_URL}/api/orders/my-orders`, 
                 {
                     headers: {
@@ -25,7 +25,7 @@ export const fetchUserOrders = createAsyncThunk(
 export const fetchOrderDetails = createAsyncThunk("orders/fetchOrderDetails", async (orderId, 
     {rejectWithValue}) => {
         try {
-            const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/orders/${orderId}`, 
+            const response = await api.get(`${import.meta.env.VITE_BACKEND_URL}/api/orders/${orderId}`, 
             {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem("userToken")}`,
@@ -43,7 +43,7 @@ export const fetchOrderDetails = createAsyncThunk("orders/fetchOrderDetails", as
         initialState: {
             orders: [],
             totalOrders: 0,
-            ordersDetails: null,
+            orderDetails: null,
             loading: false,
             error: null,
         },
@@ -70,7 +70,7 @@ export const fetchOrderDetails = createAsyncThunk("orders/fetchOrderDetails", as
             })
             .addCase(fetchOrderDetails.fulfilled, (state, action) => {
                 state.loading = false;
-                state.ordersDetails = action.payload;
+                state.orderDetails = action.payload;
             })
             .addCase(fetchOrderDetails.rejected, (state, action) => {
                 state.loading = false;

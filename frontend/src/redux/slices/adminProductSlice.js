@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
+import api from "../../utils/axiosInstance";
 
 const API_URL = `${import.meta.env.VITE_BACKEND_URL}`;
 
@@ -15,7 +15,7 @@ export const fetchAdminProducts = createAsyncThunk(
   "adminProducts/fetchProducts",
   async (_, { rejectWithValue }) => {
     try {
-      const response = await axios.get(`${API_URL}/api/admin/products`, {
+      const response = await api.get(`${API_URL}/api/admin/products`, {
         headers: getAuthHeader(),
       });
       return response.data;
@@ -32,7 +32,7 @@ export const createProduct = createAsyncThunk(
   "adminProducts/createProduct",
   async (productData, { rejectWithValue }) => {
     try {
-      const response = await axios.post(
+      const response = await api.post(
         `${API_URL}/api/admin/products`,
         productData,
         {
@@ -53,7 +53,7 @@ export const updateProduct = createAsyncThunk(
   "adminProducts/updateProduct",
   async ({ id, productData }, { rejectWithValue }) => {
     try {
-      const response = await axios.put(
+      const response = await api.put(
         `${API_URL}/api/products/${id}`,
         productData,
         {
@@ -74,7 +74,7 @@ export const deleteProduct = createAsyncThunk(
   "adminProducts/deleteProducts",
   async (id, { rejectWithValue }) => {
     try {
-      await axios.delete(`${API_URL}/api/products/${id}`, {
+      await api.delete(`${API_URL}/api/products/${id}`, {
         headers: getAuthHeader(),
       });
       return id;
